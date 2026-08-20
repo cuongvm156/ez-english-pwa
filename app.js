@@ -74,11 +74,22 @@ function loadActiveMedia(){
 }
 
 function applyPlaybackModeUI(){
-  els.playbackMode.value=playbackMode;
-  if(playbackMode==='once')els.repeatInfo.textContent='Phát 1 lần rồi dừng.';
-  if(playbackMode==='repeat-one')els.repeatInfo.textContent='Tự phát lại audio hiện tại liên tục.';
-  if(playbackMode==='repeat-3')els.repeatInfo.textContent='Phát tổng cộng 3 lần rồi dừng.';
-  if(playbackMode==='lesson-loop')els.repeatInfo.textContent='Main → Vocabulary → Mini → Main...';
+  els.playbackMode.value = playbackMode;
+
+  els.audio.loop = (playbackMode === 'repeat-one');
+
+  if(playbackMode === 'once')
+    els.repeatInfo.textContent = 'Phát 1 lần rồi dừng.';
+
+  if(playbackMode === 'repeat-one')
+    els.repeatInfo.textContent = 'Tự phát lại audio hiện tại liên tục.';
+
+  if(playbackMode === 'repeat-3')
+    els.repeatInfo.textContent = 'Phát tổng cộng 3 lần rồi dừng.';
+
+  if(playbackMode === 'lesson-loop')
+    els.repeatInfo.textContent =
+      'Main → Vocabulary → Mini → Main...';
 }
 
 function switchTabAndPlay(nextTab){
@@ -89,11 +100,6 @@ function switchTabAndPlay(nextTab){
 
 function handleEnded(){
   if(playbackMode==='once')return;
-
-  if(playbackMode==='repeat-one'){
-    els.audio.currentTime=0;els.audio.play().catch(()=>{});return;
-  }
-
   if(playbackMode==='repeat-3'){
     repeatCount++;
     if(repeatCount<3){
