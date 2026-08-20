@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="EZ English">
 <title>EZ English</title>
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./style.css?v=1.2">
 </head>
 <body>
 <main class="app">
@@ -54,6 +54,18 @@
 </section>
 </section>
 </main>
-<script src="./app.js"></script>
+<script src="./app.js?v=1.2"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      const reg = await navigator.serviceWorker.register('./sw.js?v=1.2');
+      await reg.update();
+    } catch (e) {
+      console.warn('Service Worker update failed', e);
+    }
+  });
+}
+</script>
 </body>
 </html>
