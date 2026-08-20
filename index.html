@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EZ English">
+<title>EZ English</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+<section id="listView">
+  <header class="hero"><div><h1>EZ English</h1><p>Original Effortless English</p></div><span class="badge">PWA Test</span></header>
+  <div class="panel"><div class="row between"><strong>Lessons</strong><button id="reloadBtn" class="small">Reload</button></div>
+  <p id="status" class="muted">Đang tải dữ liệu...</p><div id="lessonList" class="lesson-list"></div></div>
+</section>
+
+<section id="playerView" class="hidden">
+  <header class="player-head"><button id="backBtn" class="icon-btn">←</button><div class="title-wrap"><div id="lessonNo" class="muted small-text"></div><h2 id="lessonTitle">Lesson</h2></div></header>
+  <div class="tabs">
+    <button class="tab active" data-tab="main">Main Story</button>
+    <button class="tab" data-tab="vocab">Vocabulary</button>
+    <button class="tab" data-tab="mini">Mini Story</button>
+  </div>
+  <section class="panel transcript-panel"><h3>Transcript</h3><div id="transcript" class="transcript"></div></section>
+  <section class="panel sticky-player">
+    <div class="row between"><strong id="modeLabel">Main Story</strong><span id="audioStatus" class="muted small-text">Ready</span></div>
+    <audio id="audio" controls preload="metadata"></audio>
+    <div class="quick-controls"><button id="rewindBtn">↶ 10s</button><button id="forwardBtn">10s ↷</button></div>
+    <details><summary>Thông tin test</summary><div id="debug" class="debug"></div></details>
+  </section>
+</section>
+</main>
+<script src="./app.js"></script>
+</body>
+</html>
