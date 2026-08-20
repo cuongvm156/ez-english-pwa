@@ -40,7 +40,16 @@
 <div class="row between"><strong id="modeLabel">Main Story</strong><span id="audioStatus" class="muted small-text">Ready</span></div>
 <audio id="audio" controls preload="metadata"></audio>
 <div class="quick-controls"><button id="rewindBtn">↶ 10s</button><button id="forwardBtn">10s ↷</button></div>
+<div class="speed-control">
+  <span class="speed-label">Playback Speed</span>
 
+  <div class="speed-buttons">
+    <button class="speed-btn" data-speed="0.75">0.75x</button>
+    <button class="speed-btn active" data-speed="1">1x</button>
+    <button class="speed-btn" data-speed="1.25">1.25x</button>
+    <button class="speed-btn" data-speed="1.5">1.5x</button>
+  </div>
+</div>
 <div class="playback-mode">
 <label for="playbackMode">Playback Mode</label>
 <select id="playbackMode">
