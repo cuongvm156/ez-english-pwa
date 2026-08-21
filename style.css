@@ -18,3 +18,34 @@ audio{width:100%;margin:10px 0 8px}.quick-controls{display:grid;grid-template-co
 .playback-mode{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid #e5e7eb}
 .playback-mode label{font-weight:700}.playback-mode select{width:100%;border:1px solid #d1d5db;background:#fff;border-radius:10px;padding:10px}
 .playback-mode #repeatInfo{grid-column:1/-1}
+.speed-control {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.speed-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.speed-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.speed-btn {
+  border: 0;
+  background: #e5e7eb;
+  color: #374151;
+  border-radius: 10px;
+  padding: 10px 4px;
+  font-weight: 700;
+}
+
+.speed-btn.active {
+  background: #111827;
+  color: white;
+}
