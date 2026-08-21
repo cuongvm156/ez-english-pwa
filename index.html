@@ -1,80 +1,175 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="EZ English">
-<title>EZ English</title>
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="stylesheet" href="./style.css?v=1.2">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8fafc">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="EZ English">
+  <title>EZ English</title>
+  <link rel="manifest" href="./manifest.webmanifest?v=2.0">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./style.css?v=2.0">
 </head>
 <body>
-<main class="app">
-<section id="listView">
-<header class="hero"><div><h1>EZ English</h1><p>Original Effortless English</p></div><span class="badge">V1.1</span></header>
-<div class="panel">
-<div class="row between"><strong>Lessons</strong><button id="reloadBtn" class="small">Reload</button></div>
-<p id="status" class="muted">Đang tải dữ liệu...</p>
-<div id="lessonList" class="lesson-list"></div>
-</div>
-</section>
+  <div class="app-shell">
 
-<section id="playerView" class="hidden">
-<header class="player-head">
-<button id="backBtn" class="icon-btn">←</button>
-<div class="title-wrap"><div id="lessonNo" class="muted small-text"></div><h2 id="lessonTitle">Lesson</h2></div>
-</header>
+    <!-- HOME -->
+    <main id="homeView" class="screen screen-active">
+      <header class="topbar">
+        <div>
+          <h1>EZ English</h1>
+          <p>Learn Effortless English</p>
+        </div>
+        <button id="reloadBtn" class="icon-btn" aria-label="Reload">↻</button>
+      </header>
 
-<div class="tabs">
-<button class="tab active" data-tab="main">Main Story</button>
-<button class="tab" data-tab="vocab">Vocabulary</button>
-<button class="tab" data-tab="mini">Mini Story</button>
-</div>
+      <section class="hero-card">
+        <div class="hero-copy">
+          <span class="eyebrow">ORIGINAL COURSE</span>
+          <h2>Original Effortless English</h2>
+          <p>Listen naturally. Repeat often. Learn anywhere.</p>
+          <button id="heroContinueBtn" class="hero-btn">Start learning <span>›</span></button>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="headphones">🎧</div>
+          <div class="music-note note-1">♪</div>
+          <div class="music-note note-2">♫</div>
+        </div>
+      </section>
 
-<section class="panel transcript-panel"><h3>Transcript</h3><div id="transcript" class="transcript"></div></section>
+      <section class="section-block">
+        <div class="section-title-row">
+          <div>
+            <span class="section-kicker">COURSE</span>
+            <h3>Lessons</h3>
+          </div>
+          <span id="lessonCount" class="pill">0 lessons</span>
+        </div>
+        <p id="status" class="status-text">Đang tải dữ liệu...</p>
+        <div id="lessonList" class="lesson-list"></div>
+      </section>
+    </main>
 
-<section class="panel sticky-player">
-<div class="row between"><strong id="modeLabel">Main Story</strong><span id="audioStatus" class="muted small-text">Ready</span></div>
-<audio id="audio" controls preload="metadata"></audio>
-<div class="quick-controls"><button id="rewindBtn">↶ 10s</button><button id="forwardBtn">10s ↷</button></div>
-<div class="speed-control">
-  <span class="speed-label">Playback Speed</span>
+    <!-- PLAYER -->
+    <main id="playerView" class="screen hidden">
+      <header class="player-topbar">
+        <button id="backBtn" class="icon-btn" aria-label="Back">←</button>
+        <div class="player-title-wrap">
+          <div id="lessonNo" class="player-subtitle">Lesson</div>
+          <h2 id="lessonTitle">Day of the Dead</h2>
+        </div>
+        <button id="favoriteBtn" class="icon-btn" aria-label="Favorite">♡</button>
+      </header>
 
-  <div class="speed-buttons">
-    <button class="speed-btn" data-speed="0.75">0.75x</button>
-    <button class="speed-btn active" data-speed="1">1x</button>
-    <button class="speed-btn" data-speed="1.25">1.25x</button>
-    <button class="speed-btn" data-speed="1.5">1.5x</button>
+      <section class="tabs-wrap">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="main">Main Story</button>
+          <button class="tab" data-tab="vocab">Vocabulary</button>
+          <button class="tab" data-tab="mini">Mini Story</button>
+        </div>
+      </section>
+
+      <section class="transcript-card">
+        <div class="card-heading">
+          <div>
+            <span class="section-kicker">LISTEN & READ</span>
+            <h3>Transcript</h3>
+          </div>
+          <span id="modeChip" class="mode-chip">Main Story</span>
+        </div>
+        <div id="transcript" class="transcript"></div>
+      </section>
+
+      <section class="player-card">
+        <div class="timeline-meta">
+          <span id="currentTime">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+
+        <input id="seekBar" class="seek-bar" type="range" min="0" max="1000" value="0" step="1" aria-label="Audio position">
+
+        <audio id="audio" preload="metadata"></audio>
+
+        <div class="main-controls">
+          <button id="rewindBtn" class="control-btn side-control" aria-label="Rewind 10 seconds">
+            <span class="control-icon">↶</span>
+            <span>10s</span>
+          </button>
+
+          <button id="playPauseBtn" class="play-btn" aria-label="Play">
+            <span id="playPauseIcon">▶</span>
+          </button>
+
+          <button id="forwardBtn" class="control-btn side-control" aria-label="Forward 10 seconds">
+            <span>10s</span>
+            <span class="control-icon">↷</span>
+          </button>
+        </div>
+
+        <div class="settings-section">
+          <div class="setting-label-row">
+            <span class="setting-label">Playback Speed</span>
+            <span id="speedValue" class="setting-value">1x</span>
+          </div>
+          <div class="segmented speed-buttons">
+            <button class="speed-btn" data-speed="0.75">0.75x</button>
+            <button class="speed-btn active" data-speed="1">1x</button>
+            <button class="speed-btn" data-speed="1.25">1.25x</button>
+            <button class="speed-btn" data-speed="1.5">1.5x</button>
+          </div>
+        </div>
+
+        <div class="settings-section mode-section">
+          <div class="setting-label-row">
+            <span class="setting-label">Playback Mode</span>
+            <span id="repeatInfo" class="setting-value">Play once</span>
+          </div>
+          <div class="mode-grid">
+            <button class="mode-btn active" data-mode="once">
+              <span class="mode-icon">▶</span>
+              <span>Once</span>
+            </button>
+            <button class="mode-btn" data-mode="repeat-one">
+              <span class="mode-icon">↻</span>
+              <span>Repeat One</span>
+            </button>
+            <button class="mode-btn" data-mode="repeat-3">
+              <span class="mode-icon">③</span>
+              <span>Repeat 3x</span>
+            </button>
+            <button class="mode-btn" data-mode="lesson-loop">
+              <span class="mode-icon">⟳</span>
+              <span>Lesson Loop</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="player-note" id="playerNote">
+          <span>💡</span>
+          <span>Repeat One hoạt động tốt khi khóa màn hình. Lesson Loop phụ thuộc iOS khi app ở background.</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-nav="home">
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-nav="lessons">
+        <span class="nav-icon">▤</span>
+        <span>Lessons</span>
+      </button>
+      <button class="nav-item" data-nav="player">
+        <span class="nav-icon">▷</span>
+        <span>Player</span>
+      </button>
+    </nav>
   </div>
-</div>
-<div class="playback-mode">
-<label for="playbackMode">Playback Mode</label>
-<select id="playbackMode">
-<option value="once">Once</option>
-<option value="repeat-one">Repeat One</option>
-<option value="repeat-3">Repeat 3x</option>
-<option value="lesson-loop">Lesson Loop</option>
-</select>
-<span id="repeatInfo" class="muted small-text"></span>
-</div>
-</section>
-</section>
-</main>
-<script src="./app.js?v=1.2"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => {
-    try {
-      const reg = await navigator.serviceWorker.register('./sw.js?v=1.2');
-      await reg.update();
-    } catch (e) {
-      console.warn('Service Worker update failed', e);
-    }
-  });
-}
-</script>
+
+  <script src="./app.js?v=2.0"></script>
 </body>
 </html>
