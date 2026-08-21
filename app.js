@@ -7,6 +7,8 @@ transcript:$('transcript'),modeLabel:$('modeLabel'),audioStatus:$('audioStatus')
 rewindBtn:$('rewindBtn'),forwardBtn:$('forwardBtn'),playbackMode:$('playbackMode'),repeatInfo:$('repeatInfo')};
 
 let lessons=[],currentLesson=null,activeTab='main';
+let playbackSpeed =
+  Number(localStorage.getItem('playbackSpeed')) || 1;
 let playbackMode=localStorage.getItem('playbackMode')||'once';
 let repeatCount=0;
 
@@ -133,6 +135,42 @@ els.rewindBtn.onclick=()=>els.audio.currentTime=Math.max(0,els.audio.currentTime
 els.forwardBtn.onclick=()=>{const end=Number.isFinite(els.audio.duration)?els.audio.duration:Infinity;els.audio.currentTime=Math.min(end,els.audio.currentTime+10);};
 els.audio.addEventListener('ended',handleEnded);
 els.audio.addEventListener('play',()=>{try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch(e){}});
+function applyPlaybackSpeed() {
 
+  els.audio.playbackRate = playbackSpeed;
+
+  document.querySelectorAll('.speed-btn').forEach(function(btn) {
+
+    const speed =
+      Number(btn.dataset.speed);
+
+    btn.classList.toggle(
+      'active',
+      speed === playbackSpeed
+    );
+
+  });
+
+}
+
+
+document.querySelectorAll('.speed-btn').forEach(function(btn) {
+
+  btn.addEventListener('click', function() {
+
+    playbackSpeed =
+      Number(btn.dataset.speed);
+
+    localStorage.setItem(
+      'playbackSpeed',
+      String(playbackSpeed)
+    );
+
+    applyPlaybackSpeed();
+
+  });
+
+});
 applyPlaybackModeUI();
+applyPlaybackSpeed();
 loadLessons();
